@@ -17,7 +17,7 @@
                 <th>Penerbit</th>
                 <th>Tahun</th>
                 <th>Stok</th>
-                <th>Kategori</th>
+                <th>ID Kategori</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -30,7 +30,7 @@
                     <td>{{ $book['penerbit'] }}</td>
                     <td>{{ $book['tahun_terbit'] }}</td>
                     <td>{{ $book['stok'] }}</td>
-                    <td>{{ $book['kategori'] }}</td>
+                    <td>{{ $book['category_id'] }}</td>
                     <td>
                         <a href="{{ route('books.show', $book['id']) }}">Detail</a>
                         |
@@ -39,7 +39,7 @@
                         <form class="inline" action="{{ route('books.destroy', $book['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Hapus</button>
+                            <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
@@ -51,5 +51,7 @@
         </tbody>
     </table>
 
-    <p><em>Catatan: data di atas masih data dummy (array statis di Controller), belum dari database. Migration &amp; Model Eloquent akan dipelajari di modul berikutnya.</em></p>
+    {{ $books->links() }}
+
+    <p><em>Catatan: kolom kategori masih menampilkan ID. Menampilkan nama kategori memerlukan Eloquent Relationship, dipelajari di Pertemuan selanjutnya.</em></p>
 @endsection
